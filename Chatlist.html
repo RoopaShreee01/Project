@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User List</title>
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <script src="./scripts/bootstrap.bundle.js"></script>
+    <script src="./scripts/DeleteUsers.js"> </script>
+    <script src="./scripts/Uploadfile.js"></script>
+</head>
+
+<body class="bg-dark text-white vh-100">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="./Chatlist.html">Group Chat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./UserList.html">Manage Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./DocumentList.html">Manage Documents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Welcome.html">Logout</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div>
+        <h1>Group Chat</h1>
+    </div>
+    <div class="container">
+        <div class="chat-box p-3 mt-3 border border-secondary rounded bg-light text-dark" id="chatBoxArea">
+            <div id="timeanddate"></div>
+        </div>
+    </div>
+    <div class="container chat-container">
+        <div class="d-flex align-items-center chat-input-section">
+            <div id="chat-label" class="chat-label">User</div>
+            <input type="text" id="chatInput" class="form-control me-2 chat-input-box"
+                placeholder="Type your message...">
+            <button class="btn btn-primary me-2" onclick="sendMessage()">Send</button>
+            <button class="btn btn-primary" onclick="refreshMessage()">Refresh</button>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            const loginusers = JSON.parse(sessionStorage.getItem("Logindata"));
+            if (loginusers && loginusers.length > 0) {
+                document.getElementById("chat-label").innerText = loginusers[0].email || "User";
+            }
+        }
+        function sendMessage() {
+            const input = document.getElementById("chatInput");
+            const message = input.value;
+            const chatBox = document.getElementById("chatBoxArea");
+            const chatid = document.getElementById("chat-label");
+            if (message !== "") {
+                const msgDiv = document.createElement("div");
+                msgDiv.className = "chat-message";
+                msgDiv.innerText = message;
+                chatBox.appendChild(msgDiv);
+                input.value = "";
+            }
+        }
+
+        function refreshMessage() {
+            const chatBox = document.getElementById("chatBoxArea");
+            chatBox.innerHTML = ""; // clear all chat messages
+        }
+
+
+    </script>
+
+</body>
+
+</html>

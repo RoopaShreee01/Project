@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <script src="./scripts/bootstrap.bundle.js"></script>
+
+    <script src="./scripts/EditUsers.js" defer></script>
+</head>
+
+<body class="bg-dark text-white d-flex vh-100">
+    <div class="container mt-4">
+        <h1>Edit User Information</h1>
+        <div class="row">
+            <div class="col-xxl-6">
+                <form action="Userlist.html" method="get" onsubmit="return editUser()">
+                    Fullname <input class="form-control" type="text" id="editFullname">
+                    Email <input class="form-control" type="email" id="editEmail">
+                    <input type="submit" value="Save" class="mt-2 btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

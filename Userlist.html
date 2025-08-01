@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User List</title>
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <script src="./scripts/bootstrap.bundle.js"></script>
+    <script src="./scripts/DeleteUsers.js"> </script>
+</head>
+
+<body class="bg-dark text-white vh-100">
+    <!-- Navigation Bar Bootstrap -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="./Chatlist.html">Group Chat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./UserList.html">Manage Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./DocumentList.html">Manage Documents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Welcome.html">Logout</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h1>User List</h1>
+        <table id="userTable" class="table table-dark table-hover table-striped">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+            <script>
+                const storedUsers = JSON.parse(localStorage.getItem('regusersLocalstorage'));//getting values from the localStorage
+                const table = document.getElementById('userTable');
+                for (let i = 0; i < storedUsers.length; i++) {
+                    const user = storedUsers[i];
+                    document.write(`
+                        <tr>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td><a href="./EditUser.html?id=${user.id}">Edit</a> | <a data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="deleteUserId(${user.id})" href="">Delete</a></td>
+                        </tr>
+                        `);
+                }
+                document.write(`</table>`);
+            </script>
+        </table>
+
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm User Deletion</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure? User will be deleted;
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="deleteUser()">OK</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

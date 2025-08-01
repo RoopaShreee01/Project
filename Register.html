@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="./css/bootstrap.css" rel="stylesheet">
+    <script src="./scripts/bootstrap.bundle.js"></script>
+    <script src="./scripts/regValidate.js"></script>
+
+</head>
+
+<body class="bg-dark text-white d-flex align-items-center justify-content-center vh-100">
+    <div class="card bg-secondary bg-opacity-10 border-0 p-5 rounded-4 shadow-lg"
+        style="width: 100%; max-width: 500px;">
+        <h2 class="text-center text-white mb-4">Register</h2>
+        <form action="RegisterSuccess.html" method="get" onsubmit="return regValidation()">
+            <table>
+                <div class="mb-3">
+                    <label class="form-label text-white">Full Name</label>
+                    <input type="text" class="form-control rounded-3" name="name" id="full-name-id"
+                        placeholder="Enter Your Name">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label text-white">Email</label>
+                    <input type="email" class="form-control rounded-3" name="email" id="email-id"
+                        placeholder="Enter Your Email">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white">Password</label>
+                    <input type="password" class="form-control rounded-3" name="pwd" id="pwd-id"
+                        placeholder="Enter Your Password">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-white">Confirm Password</label>
+                    <input type="password" class="form-control rounded-3" name="Confirmpwd" id="confirmpwd-id"
+                        placeholder="Confirm Password">
+                </div>
+
+                <div class=" d-grid mb-3">
+                    <label class="form-label text-white"></label>
+                    <input type="submit" class="btn text-white fw-bold" style="background-color: #6f42c1;"
+                        value="Register">
+                </div>
+            </table>
+        </form>
+    </div>
+</body>
+
+</html>
