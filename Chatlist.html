@@ -6,7 +6,7 @@
     <link href="./css/bootstrap.css" rel="stylesheet">
     <script src="./scripts/bootstrap.bundle.js"></script>
     <script src="./scripts/DeleteUsers.js"> </script>
-    <script src="./scripts/Uploadfile.js"></script>
+    <script src="./scripts/Chat.js"></script>
 </head>
 
 <body class="bg-dark text-white vh-100">
@@ -36,49 +36,33 @@
             </div>
         </div>
     </nav>
-    <div>
-        <h1>Group Chat</h1>
-    </div>
-    <div class="container">
-        <div class="chat-box p-3 mt-3 border border-secondary rounded bg-light text-dark" id="chatBoxArea">
-            <div id="timeanddate"></div>
-        </div>
-    </div>
-    <div class="container chat-container">
-        <div class="d-flex align-items-center chat-input-section">
-            <div id="chat-label" class="chat-label">User</div>
-            <input type="text" id="chatInput" class="form-control me-2 chat-input-box"
-                placeholder="Type your message...">
-            <button class="btn btn-primary me-2" onclick="sendMessage()">Send</button>
-            <button class="btn btn-primary" onclick="refreshMessage()">Refresh</button>
+    <div class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 90vh;">
+        <h1 class="w-100 text-center my-4">Group Chat</h1>
+        <div class="w-100" style="max-width: 900px;">
+            <div class="bg-light text-dark border border-secondary rounded p-3 mb-3" id="chatBoxArea"
+                style="height: 400px; overflow-y: auto;">
+                <div id="timeanddate"></div>
+            </div>
+            <form class="d-flex align-items-center gap-2" onsubmit="sendMessage(); return false;">
+                <div id="chatlabel" class="chat-label bg-body-tertiary text-black px-3 py-2 rounded me-2">User</div>
+                <input type="text" id="chatInput" class="form-control flex-grow-1" placeholder="Type your message...">
+                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="button" class="btn btn-primary" onclick="refreshMessage()">Refresh</button>
+            </form>
         </div>
     </div>
 
     <script>
         window.onload = function () {
             const loginusers = JSON.parse(sessionStorage.getItem("Logindata"));
-            if (loginusers && loginusers.length > 0) {
-                document.getElementById("chat-label").innerText = loginusers[0].email || "User";
+            if (loginusers.length > 0) {
+                sessionStorage.setItem("Logindata", JSON.stringify(loginusers));
+                const name = loginusers[0].email.split("@")[0];
+                document.getElementById("chatlabel").innerText = name;
             }
-        }
-        function sendMessage() {
-            const input = document.getElementById("chatInput");
-            const message = input.value;
-            const chatBox = document.getElementById("chatBoxArea");
-            const chatid = document.getElementById("chat-label");
-            if (message !== "") {
-                const msgDiv = document.createElement("div");
-                msgDiv.className = "chat-message";
-                msgDiv.innerText = message;
-                chatBox.appendChild(msgDiv);
-                input.value = "";
-            }
+
         }
 
-        function refreshMessage() {
-            const chatBox = document.getElementById("chatBoxArea");
-            chatBox.innerHTML = ""; // clear all chat messages
-        }
 
 
     </script>

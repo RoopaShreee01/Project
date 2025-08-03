@@ -2,10 +2,9 @@
 <html>
 
 <head>
-    <title>User List</title>
+    <title>Document List</title>
     <link href="./css/bootstrap.css" rel="stylesheet">
     <script src="./scripts/bootstrap.bundle.js"></script>
-    <script src="./scripts/DeleteUsers.js"> </script>
     <script src="./scripts/Uploadfile.js"></script>
 </head>
 
@@ -19,53 +18,36 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="./Chatlist.html">Group Chat</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./UserList.html">Manage Users</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./DocumentList.html">Manage Documents</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./Welcome.html">Logout</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="./Chatlist.html">Group Chat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./UserList.html">Manage Users</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./DocumentList.html">Manage Documents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./Welcome.html">Logout</a></li>
                 </ul>
-
             </div>
         </div>
     </nav>
+
     <div class="container mt-4 text-left">
         <h2>My Uploads</h2>
         <table id="userTable" class="table table-dark table-hover table-striped">
-            <tr>
-                <th>Label</th>
-                <th>File Name</th>
-                <th>Action</th>
-            </tr>
-            <script>
-                const storedFiles = JSON.parse(localStorage.getItem('Files'));
-                const table = document.getElementById('userTable');
-                for (let i = 0; i < storedFiles.length; i++) {
-                    const uploadedFiles = storedFiles[i];
-                    document.write(`
-                        <tr>
-                            <td>${uploadedFiles.label}</td>
-                            <td>${uploadedFiles.filename}</td>
-                            <td><a href="./EditUser.html?id=${uploadedFiles.id}">Edit</a> | <a data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="deleteUserId(${uploadedFiles.id})" href="">Delete</a></td>
-                        </tr>
-                        `);
-                }
-                document.write(`</table>`);
-            </script>
+            <thead>
+                <tr>
+                    <th>Label</th>
+                    <th>File Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
         </table>
-
     </div>
 
     <div class="container mt-4 text-left">
         <input type="file" name="addUpload" id="uploadfile" onchange="fileUpload(this)">
     </div>
+    <script>
+        // Ensure table loads on page load
+        window.onload = populateTable;
+    </script>
 </body>
 
 </html>

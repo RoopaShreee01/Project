@@ -27,6 +27,9 @@ function loginValidation() {
 
   if (loginEmailExists) {
     if (loginEmailExists.password === loginPassword) {
+      const now = new Date();
+      const loginDateTime = now.toLocaleString();
+      logusers.loginDateTime = loginDateTime;
       storage.push(logusers);
       sessionStorage.setItem("Logindata", JSON.stringify(storage));
       return true;

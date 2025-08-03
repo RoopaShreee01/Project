@@ -5,9 +5,9 @@ function deleteUserId(id) {
 }
 
 function deleteUser() {
-  const users = JSON.parse(localStorage.getItem("regusersLocalstorage")) || [];
-  const filterUser = users.filter((user) => user.id !== deleteId); // filter the deleteId from the local storage
-  localStorage.setItem("regusersLocalstorage", JSON.stringify(filterUser));
+  const deletefile = JSON.parse(localStorage.getItem("Files")) || [];
+  const filterfile = deletefile .filter((user) => user.id !== deleteId); // filter the deleteId from the local storage
+  localStorage.setItem("File", JSON.stringify(filterfile));
   alert("deleted");
   window.location.reload();
 }
