@@ -20,7 +20,7 @@ function populateTable() {
                     <td>
                         <a href="#" onclick="changeLabel('${file.id}')">Edit</a> |
                         <a href="#" onclick="deleteFile('${file.id}')">Delete</a> |
-                        <a href="#" onclick="openShareDialog('${file.id}')">Share</a>
+                        <a href="ShareFile.html?fileId=${file.id}">Share</a>
                     </td>
                 `;
       tableBody.appendChild(row);
@@ -31,18 +31,18 @@ function populateTable() {
 function populateSharedTable() {
   const sharedTableBody = document.getElementById("sharedTableBody");
   sharedTableBody.innerHTML = "";
-  const files = JSON.parse(localStorage.getItem("Files")) || [];
-  files
-    .filter((f) => f.shared === true)
-    .forEach((file) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-                    <td>${file.label}</td>
-                    <td>${file.filename}</td>
-                    <td>${file.sharedBy || file.uploadedBy}</td>
-                `;
-      sharedTableBody.appendChild(row);
-    });
+  const currentUser = getCurrentUserEmail();
+  const sharedKey = `sharedFiles_${currentUser}`;
+  const sharedFiles = JSON.parse(localStorage.getItem(sharedKey)) || [];
+  sharedFiles.forEach(file => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${file.label}</td>
+      <td>${file.filename}</td>
+      <td>${file.sharedBy}</td>
+    `;
+    sharedTableBody.appendChild(row);
+  });
 }
 
 // Share file

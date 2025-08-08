@@ -55,7 +55,7 @@
                     <th>Shared by</th>
                 </tr>
             </thead>
-            <tbody id="tableBody"></tbody>
+            <tbody id="sharedTableBody"></tbody>
         </table>
     </div>
 
@@ -70,6 +70,15 @@
             populateSharedTable();
         };
 
+        // In populateSharedTable()
+        row.innerHTML = `
+            <td>${file.label}</td>
+            <td>${file.filename}</td>
+            <td>
+              Shared by: ${file.sharedBy || file.uploadedBy}<br>
+              Shared with: ${(file.sharedWith || []).join(", ")}
+            </td>
+        `;
     </script>
 </body>
 
